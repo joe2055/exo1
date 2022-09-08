@@ -1,20 +1,19 @@
 name: projet1
-on: [push]
+on: [push, pull_request]
 env:
   variable1: "c'est un push"
   variable2: "c'est un pull request"
 jobs:
   jobs1:
       runs-on: ubuntu-latest
+      if: ${{ github.event_name == 'push' }}
       steps:
         - uses: actions/checkout@v3
         - name: push
           run: echo $variable1
-           #if [[ "$variable" == "yes" ]]; then
-            #run: echo $variable2
-            #fi
   jobs2:
       runs-on: ubuntu-latest
+      if: ${{ github.event_name == 'pull_request' }}
       steps:
         - uses: actions/checkout@v3
         - name: pull
